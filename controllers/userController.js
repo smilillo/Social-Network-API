@@ -54,5 +54,6 @@ module.exports = {
           .catch((err) => res.status(500).json(err));
       },
     // POST new friend
+    
     // DELETE friend
 };
