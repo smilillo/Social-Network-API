@@ -22,10 +22,10 @@ module.exports = {
     // POST thought
     createThought(req, res) {
         Thought.create(req.body)
-        .then(({ username }) => {
+        .then(({ _id }) => {
             return User.findOneAndUpdate(
-              { username: body.username },
-              { $push: { thoughts: username } },
+              { _id: req.body.userId },
+              { $push: { thoughts: _id } },
               { new: true }
             );
           })
