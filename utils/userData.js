@@ -1,6 +1,6 @@
 const userData = [{
-    username: ,
-    email: ,
+    username: 'SofieMilillo',
+    email: 'sofiemilillo@gmail.com',
 },
 {
     username: ,
