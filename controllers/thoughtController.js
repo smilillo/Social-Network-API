@@ -22,11 +22,21 @@ module.exports = {
     // POST thought
     createThought(req, res) {
         Thought.create(req.body)
-          .then((thought) => res.json(thought))
-          .catch((err) => {
-            console.log(err);
-            return res.status(500).json(err);
-          });
+        .then(({ username }) => {
+            return User.findOneAndUpdate(
+              { username: body.username },
+              { $push: { thoughts: username } },
+              { new: true }
+            );
+          })
+          .then((user) => {
+            if (!user) {
+              return res
+                .status(404).json({ message: "No user with this username" });
+            }
+            res.json({ message: "Thought created" });
+          })
+          .catch((err) => res.json(err));
       },
     // PUT thought by id
     updateThought(req, res) {
