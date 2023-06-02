@@ -4,9 +4,9 @@ const { User, Thought } = require('../models');
 module.exports = {
     // GET all thoughts
     getThoughts(req, res) {
-        Thought.find()
+        Thought.find({})
         // .select('-__v')
-        .then((thought) => res.json(thought))
+        .then((thoughts) => res.json(thoughts))
         .catch((err) => res.status(500).json(err));
     },
     // GET single thought
@@ -23,7 +23,7 @@ module.exports = {
     // POST thought
     createThought(req, res) {
         Thought.create(req.body)
-        .then(({ _id }) => {
+        .then(({ thought }) => {
             return User.findOneAndUpdate(
               { _id: req.body.userId },
               { $push: { thoughts: thought._id } },
