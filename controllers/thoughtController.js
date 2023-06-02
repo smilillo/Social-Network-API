@@ -5,7 +5,8 @@ module.exports = {
     // GET all thoughts
     getThoughts(req, res) {
         Thought.find()
-        .then((thoughts) => res.json(thoughts))
+        // .select('-__v')
+        .then((thought) => res.json(thought))
         .catch((err) => res.status(500).json(err));
     },
     // GET single thought
@@ -25,7 +26,7 @@ module.exports = {
         .then(({ _id }) => {
             return User.findOneAndUpdate(
               { _id: req.body.userId },
-              { $push: { thoughts: _id } },
+              { $push: { thoughts: thought._id } },
               { new: true }
             );
           })
